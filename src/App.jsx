@@ -9,9 +9,33 @@ function App() {
 
   const [projectState,setProjectState] = React.useState({
     selectedProjetct: undefined,
-    projects: []
+    projects: [],
+    tasks: []
   });
 
+  function handleAddTask(task) {
+
+    const taskId = Math.random();
+    
+
+    setProjectState((prev) => {
+      const taskObj = {
+        projectId: prev.selectedProjetct,
+        taskId: taskId,
+        task: task
+     }
+      return {
+        ...prev,
+        tasks: [...prev.tasks, taskObj ]
+      }
+    })
+  }
+
+  function handleDeleteTask() {
+
+  }
+  
+  console.log(projectState,"app")
   // console.log(projectState.selectedProjetct)
 
   function handleProjectState() {
@@ -43,15 +67,15 @@ function App() {
   }
 
   function handleAddProject(project) {
-  
     setProjectState((prev) => {
 
       const newProject = {
-        ...project,
+        title: project.title,
+        date: project.enteredDate,
+        description: project.enteredDesc,
         id: Math.random()
       }
 
-      
       return {
         ...prev,
         projects: [...prev.projects, newProject ]
@@ -87,7 +111,7 @@ function App() {
   // console.log(selectedId)
 
 
-  let content = <Display info={selectedId} deleteItem={handleDelete} />; 
+  let content = <Display tasks={projectState.tasks}  info={selectedId} deleteItem={handleDelete} onAddTask={handleAddTask} onDeleteTask={handleDeleteTask}/>; 
 
   if(projectState.selectedProjetct === null) {
     content = <NewProject addProject={handleAddProject} close={handleClose} cancel={handleCancel}/>
