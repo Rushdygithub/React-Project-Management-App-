@@ -31,9 +31,9 @@ export default function NewProject({addProject,close,cancel}) {
   return (
    <>
       <Modal ref={modal} caption='Close'>
-         <h2>Invalid Input</h2>
-         <p>Opps! looks like you forgot to enter a value.</p>
-         <p>Please make sure you provide a valid for every input filed.</p>
+         <h2 className='text-xl font-bold text-stone-700 my-4'>Invalid Input</h2>
+         <p className='text-stone-600 my-4'>Opps! looks like you forgot to enter a value.</p>
+         <p className='text-stone-600 my-4'>Please make sure you provide a valid for every input filed.</p>
       </Modal>
       <div className='w-[35rem] mt-16 mx-16'> 
       <menu className='flex item-center justify-end gap-4'>

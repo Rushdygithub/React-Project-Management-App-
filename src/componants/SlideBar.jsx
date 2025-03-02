@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 
-export default function SlideBar({onStartAddProject,allProject,tabClick}) {
+export default function SlideBar({onStartAddProject,allProject,onSelect}) {
 
 
   return (
@@ -9,14 +9,12 @@ export default function SlideBar({onStartAddProject,allProject,tabClick}) {
       <h3>Your Projects List</h3>
       <Button onClick={onStartAddProject} >ADD+</Button>
       {allProject.projects.map((item)=> {
-        return <div className="tab-buttons" key={item.id}>
-           <button>{item.title}</button>
+
+        return <div className="mt-4" key={item.id}>
+           <button onClick={()=> onSelect(item.id)} >{item.title}</button>
         </div>
+
       })}
-       {/* <div class="tab-buttons">
-          <button className='block'>Company Work</button>
-          <button className='block'>Udemy Work</button>
-       </div> */}
     </div>
   )
 }

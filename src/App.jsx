@@ -3,6 +3,7 @@ import SlideBar from "./componants/SlideBar";
 import NewProject from "./componants/NewProject";
 import NoProjectSelected from "./componants/NoProjectSelected";
 import React from 'react'
+import Display from "./componants/Display";
 
 function App() {
 
@@ -11,8 +12,7 @@ function App() {
     projects: []
   });
 
-  console.log(projectState,"========")
-
+  // console.log(projectState.selectedProjetct)
 
   function handleProjectState() {
     setProjectState((prevState) => {
@@ -31,6 +31,7 @@ function App() {
       }
     });
   }
+
 
   function handleCancel() {
     setProjectState((prevState) => {
@@ -58,19 +59,35 @@ function App() {
     })
   }
 
-  // function handleTabButton(id,status) {
-  //   console.log("Excuted",id,status,"===========")
-  //   setProjectState((prev)=> {
-  //     return {
-  //       ...prev,
-  //       selectedProjetct: status
-  //     }
-  //   })
-  // }
-
   
+  function handleSelectProject(id) {
+    console.log("Excuted",id,"===========")
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjetct: id
+      }
+    });
+    
+  }
 
-  let content; 
+  const selectedId = projectState.projects.find(project => project.id === projectState.selectedProjetct)
+  
+  //Delete from a array method using filter
+  function handleDelete() {
+     setProjectState(prev => {
+       return { 
+        ...prev,
+        selectedProjetct: undefined,
+        projects: projectState.projects.filter(item => item.id !== prev.selectedProjetct)
+       }
+     })  
+  }
+
+  // console.log(selectedId)
+
+
+  let content = <Display info={selectedId} deleteItem={handleDelete} />; 
 
   if(projectState.selectedProjetct === null) {
     content = <NewProject addProject={handleAddProject} close={handleClose} cancel={handleCancel}/>
@@ -79,7 +96,7 @@ function App() {
   }
   return (
     <div className="h-screen flex">
-      <SlideBar onStartAddProject={handleProjectState} allProject={projectState}  />
+      <SlideBar onStartAddProject={handleProjectState} allProject={projectState} onSelect={handleSelectProject} />
       {content}
     </div>
   );
