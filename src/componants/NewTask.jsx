@@ -3,7 +3,7 @@ import Button from './Button'
 
 export default function NewTask({handleInput,onAdd}) {
 
-  const [task,setTask] = React.useState();
+  const [task,setTask] = React.useState('');
 
   function handleChange(event) {
     const task = event.target.value;

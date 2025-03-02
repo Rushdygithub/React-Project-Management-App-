@@ -31,10 +31,15 @@ function App() {
     })
   }
 
-  function handleDeleteTask() {
-
+  function handleDeleteTask(id) {
+    setProjectState(prev => {
+      return { 
+       ...prev,
+       tasks: projectState.tasks.filter(item => item.id !== id)
+      }
+    })  
   }
-  
+
   console.log(projectState,"app")
   // console.log(projectState.selectedProjetct)
 
